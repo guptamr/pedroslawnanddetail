@@ -1,0 +1,14 @@
+# Local artifacts
+.DS_Store
+Thumbs.db
+*.log
+
+# Node (only if Playwright is added later)
+node_modules/
+playwright-report/
+test-results/
+
+# Editor state
+.idea/
+*.swp
+*.swo
