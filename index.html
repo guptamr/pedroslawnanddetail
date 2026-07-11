@@ -10,7 +10,7 @@
     />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; form-action https://api.web3forms.com; object-src 'none'; base-uri 'self';"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; form-action https://app.forminit.com; object-src 'none'; base-uri 'self';"
     />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -412,11 +412,11 @@
               </div>
               <div class="contact__card">
                 <div class="contact__icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24" width="22" height="22"><path d="M4 4h16v16H4z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 9h8M8 13h8M8 17h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                  <svg viewBox="0 0 24 24" width="22" height="22"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7 10l4 4 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
                 <div class="contact__card-body">
-                  <h3>How It Works</h3>
-                  <p>Fill in the form with what you need. Attach up to 5 photos so we can quote accurately.</p>
+                  <h3>Have Photos?</h3>
+                  <p>Submit the form and reply to our email with your photos attached — that's the fastest way to get an accurate quote.</p>
                 </div>
               </div>
             </div>
@@ -430,7 +430,6 @@
                 id="contactForm"
                 action="https://api.web3forms.com/submit"
                 method="POST"
-                enctype="multipart/form-data"
                 data-form-endpoint="form.endpoint"
               >
                 <!-- Web3Forms configuration -->
@@ -469,33 +468,10 @@
                 </div>
                 <div class="form__group">
                   <label for="message">Tell Us About the Job</label>
-                  <textarea id="message" name="message" rows="4" required placeholder="Describe the yard, vehicle, or job. The more detail, the better the quote."></textarea>
-                </div>
-                <div class="form__group">
-                  <label for="photos">Attach Photos <span class="form__optional">(optional — up to 5 files, 10 MB total)</span></label>
-                  <div class="uploader" data-uploader>
-                    <input
-                      id="photos"
-                      class="uploader__input"
-                      type="file"
-                      name="attachments"
-                      multiple
-                      accept="image/*"
-                      data-uploader-input
-                    />
-                    <div class="uploader__area" data-uploader-area>
-                      <svg class="uploader__icon" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
-                        <path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                      <p class="uploader__prompt">Drop photos here or click to browse</p>
-                      <p class="uploader__note">JPG, PNG, HEIC — up to 5 files, 10&nbsp;MB total</p>
-                    </div>
-                    <ul class="uploader__list" data-uploader-list hidden></ul>
-                    <p class="uploader__error" data-uploader-error hidden></p>
-                  </div>
+                  <textarea id="message" name="message" rows="5" required placeholder="Describe the yard, vehicle, or job as clearly as possible. If you have photos, mention that below — we'll reply and you can send them back to us as an email attachment."></textarea>
                 </div>
                 <p class="form__hint">
-                  Photos help us give an accurate quote. Prefer typing? Just describe the job above.
+                  <strong>Have photos?</strong> Submit the form first — we'll reply within one business day, and you can send photos directly as an attachment to that reply.
                 </p>
                 <button type="submit" class="btn btn--cta btn--full btn--lg" data-form-submit>
                   <span data-form-submit-text>Request My Quote</span>

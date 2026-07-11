@@ -12,7 +12,7 @@
     },
     contact: {
       // Phone / email / social channels are intentionally hidden from the public site.
-      // The contact form (Web3Forms) is the only visible way to reach the business.
+      // The contact form (Forminit) is the only visible way to reach the business.
       phone: null,
       phoneDisplay: null,
       email: 'aliziapeters2000@gmail.com',
@@ -27,21 +27,22 @@
     },
     form: {
       // -----------------------------------------------------------------
-      // WEB3FORMS SETUP (one-time, ~30 seconds)
+      // FORMINIT SETUP (one-time, ~60 seconds)
       // -----------------------------------------------------------------
-      // 1. Go to https://web3forms.com/
-      // 2. Enter Peter's real email (e.g. aliziapeters2000@gmail.com)
-      //    — this is where quote requests + attached photos will arrive.
-      // 3. Click the verification link Web3Forms emails you.
-      // 4. Copy the access key they show you.
-      // 5. Paste it below in place of YOUR-WEB3FORMS-ACCESS-KEY-HERE.
-      // 6. Commit + push — the form starts working immediately.
+      // Free tier: 100 submissions/month, 10MB file storage, file uploads
+      // included. No credit card required.
       //
-      // Free tier: 250 submissions/month, up to 5 files, 10 MB total per
-      // submission. No credit card required.
+      // Steps:
+      // 1. Go to https://app.forminit.com/register
+      // 2. Sign up with Peter's email (aliziapeters2000@gmail.com).
+      // 3. Click "Create Form" → give it any name, e.g. "Pedro Quote Form".
+      // 4. Copy the form endpoint shown (looks like
+      //    https://app.forminit.com/f/abc123xyz).
+      // 5. Paste just the form ID (the bit after /f/) into `formId` below.
+      // 6. Commit + push — the form activates immediately.
       // -----------------------------------------------------------------
-      accessKey: '89ae1b8a-bcdc-4379-94f3-cf06d5104b0b',
-      endpoint: 'https://api.web3forms.com/submit',
+      formId: 'YOUR-FORMINIT-FORM-ID',
+      endpoint: 'https://app.forminit.com/f/YOUR-FORMINIT-FORM-ID',
       redirectAfter: 'https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact',
       subject: "New quote request — Pedro's Lawn & Detail"
     }

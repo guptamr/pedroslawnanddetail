@@ -63,12 +63,13 @@
     var form = document.getElementById('contactForm');
     if (!form) return;
 
-    var endpoint = getConfigValue('form.endpoint');
+    // Build the endpoint URL from the configured formId if available,
+    // otherwise fall back to the full endpoint string.
+    var formId = getConfigValue('form.formId');
+    var endpoint = formId && formId !== 'YOUR-FORMINIT-FORM-ID'
+      ? 'https://app.forminit.com/f/' + formId
+      : getConfigValue('form.endpoint');
     if (endpoint) form.setAttribute('action', endpoint);
-
-    var keyInput = form.querySelector('[data-form-key]');
-    var keyVal = getConfigValue('form.accessKey');
-    if (keyInput && keyVal) keyInput.value = keyVal;
 
     var nextInput = form.querySelector('[data-form-next]');
     var nextVal = getConfigValue('form.redirectAfter');
@@ -511,7 +512,6 @@
     initGalleryFilters();
     initLightbox();
     initScrollReveal();
-    initFileUploader();
     initFormUX();
     initFooterYear();
   }
