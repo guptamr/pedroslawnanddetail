@@ -40,7 +40,7 @@
       // Free tier: 250 submissions/month, up to 5 files, 10 MB total per
       // submission. No credit card required.
       // -----------------------------------------------------------------
-      accessKey: 'YOUR-WEB3FORMS-ACCESS-KEY-HERE',
+      accessKey: '89ae1b8a-bcdc-4379-94f3-cf06d5104b0b',
       endpoint: 'https://api.web3forms.com/submit',
       redirectAfter: 'https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact',
       subject: "New quote request — Pedro's Lawn & Detail"
