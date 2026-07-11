@@ -6,7 +6,8 @@ All work-gallery images are **real before-and-after photos** supplied by Pedro. 
 
 | File | Source | Notes |
 |---|---|---|
-| `hero/hero-backyard-transformation.jpg` | Pedro (real photo) | Wide backyard overgrown → mowed with swing set |
+| `hero/hero-backyard-transformation.jpg` | Pedro (real photo, collage) | Wide backyard overgrown → mowed with swing set. Also used as gallery item #1 |
+| `lawn/front-yard-hedge-before-after.jpg` | Pedro (real photo, collage) | Residential front yard — overgrown grass + hedge before, trimmed lawn after |
 
 ## Lawn & Yard gallery
 
