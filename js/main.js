@@ -445,6 +445,7 @@
         showError('Your browser does not support drag-and-drop uploads. Please click to browse.');
         return;
       }
+      // Explicitly call refreshList — change event may not fire on programmatic file set
       refreshList();
     });
 
@@ -464,14 +465,15 @@
     var form = document.getElementById('contactForm');
     var status = document.getElementById('formStatus');
 
-    // Show success banner if returning after form submission (?thanks=1)
+    // Show success banner if returning after native form redirect (?thanks=1)
+    // (fallback — should not normally trigger with the AJAX approach below)
     try {
       var params = new URLSearchParams(window.location.search);
       if (params.has('thanks') && status) {
         status.hidden = false;
         status.classList.add('is-success');
         status.textContent =
-          "Thanks! We received your quote request and will get back to you shortly.";
+          'Thanks! We received your quote request and will get back to you shortly.';
         if (form) form.reset();
         setTimeout(function () {
           status.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -484,12 +486,75 @@
 
     if (!form) return;
 
-    // Disable submit button + show "Sending…" on submit
-    form.addEventListener('submit', function () {
+    // --- AJAX submit: prevent full-page redirect, stay on our page ---
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      // Block if uploader has a pending error
+      var uploaderErr = form.querySelector('[data-uploader-error]');
+      if (uploaderErr && !uploaderErr.hidden) {
+        uploaderErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
       var btn = form.querySelector('[data-form-submit]');
       var btnText = form.querySelector('[data-form-submit-text]');
       if (btn) btn.disabled = true;
       if (btnText) btnText.textContent = 'Sending…';
+      if (status) { status.hidden = true; status.className = 'form__status'; }
+
+      var formId = getConfigValue('form.formId') || 'yzct3bz18ap';
+      var endpoint = 'https://forminit.com/f/' + formId;
+
+      fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        redirect: 'manual'   // capture Forminit's 302 without following it
+      })
+      .then(function (res) {
+        // 'opaqueredirect' means Forminit returned a 302 — submission accepted
+        if (res.type === 'opaqueredirect' || res.ok) {
+          // Success
+          if (status) {
+            status.hidden = false;
+            status.classList.add('is-success');
+            status.textContent =
+              '✅ Thanks! We received your quote request and will be in touch within one business day.';
+          }
+          form.reset();
+          // Also reset the uploader list
+          var list = form.querySelector('[data-uploader-list]');
+          if (list) { list.innerHTML = ''; list.hidden = true; }
+          if (status) status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          // Non-redirect, non-OK response — try to parse the error
+          return res.text().then(function (body) {
+            var parsed;
+            try { parsed = JSON.parse(body); } catch (_) { parsed = null; }
+            var msg = (parsed && parsed.message) ? parsed.message : 'Submission failed (HTTP ' + res.status + ')';
+            throw new Error(msg);
+          });
+        }
+      })
+      .catch(function (err) {
+        if (btn) btn.disabled = false;
+        if (btnText) btnText.textContent = 'Request My Quote';
+        if (status) {
+          status.hidden = false;
+          status.classList.add('is-error');
+          // Human-friendly error message
+          var msg = err && err.message;
+          if (msg && msg.indexOf('TOO_MANY_REQUESTS') !== -1) {
+            status.textContent = 'Please wait a few seconds before submitting again.';
+          } else if (msg && msg.toLowerCase().indexOf('network') !== -1) {
+            status.textContent = 'Network error — check your connection and try again.';
+          } else {
+            status.textContent = 'Something went wrong. Please try again or send us a message directly.';
+          }
+          status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        console.error('[form] submission error:', err);
+      });
     });
   }
 
