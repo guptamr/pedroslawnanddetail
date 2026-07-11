@@ -420,6 +420,8 @@
     }
 
     input.addEventListener('change', refreshList);
+    // Also listen for the custom event we dispatch after drag-and-drop
+    input.addEventListener('forminit-refresh', refreshList);
 
     // Drag & drop — browser default is to open the file, so we prevent that
     ['dragenter', 'dragover'].forEach(function (ev) {
@@ -445,8 +447,17 @@
         showError('Your browser does not support drag-and-drop uploads. Please click to browse.');
         return;
       }
-      // Explicitly call refreshList — change event may not fire on programmatic file set
+      // Explicitly call refreshList — programmatic file set may not fire 'change'
       refreshList();
+    });
+
+    // Fallback: if native click-to-browse doesn't fire 'change' in some browsers,
+    // a MutationObserver on the list will not help — instead we poll once on focus loss
+    input.addEventListener('blur', function () {
+      // Re-run in case change event was missed
+      if (input.files && input.files.length > 0 && !list.children.length) {
+        refreshList();
+      }
     });
 
     // Block form submit if there are pending validation errors
