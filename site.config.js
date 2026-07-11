@@ -22,7 +22,7 @@
       city: 'St. Thomas',
       region: 'Ontario',
       country: 'Canada',
-      areaServed: 'St. Thomas and nearby areas in Elgin County'
+      areaServed: 'St. Thomas and surrounding areas'
     },
     form: {
       endpoint: 'https://formsubmit.co/aliziapeters2000@gmail.com',
