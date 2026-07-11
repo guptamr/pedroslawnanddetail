@@ -11,11 +11,19 @@
       tagline: 'Local lawn care & car detailing in St. Thomas, Ontario'
     },
     contact: {
-      // Leave null/empty until Pedro confirms — the phone card auto-hides
-      phone: null,               // e.g. "+15195551234"
-      phoneDisplay: null,        // e.g. "(519) 555-1234"
+      // Phone + Email intentionally not exposed on the public site.
+      // The contact form still routes email to `form.endpoint` below (invisible to visitors).
+      // ------------------------------------------------------------
+      // TODO: replace `facebook` with Peter's actual Marketplace profile URL.
+      // How to grab it: open Peter's Marketplace profile in the Facebook app
+      //   → tap the ⋯ in the top-right → "Copy link"
+      //   → paste it here (should look like
+      //     https://www.facebook.com/marketplace/profile/1234567890 or
+      //     https://www.facebook.com/peta.harder).
+      phone: null,
+      phoneDisplay: null,
       email: 'aliziapeters2000@gmail.com',
-      facebook: null,            // e.g. "https://www.facebook.com/..."
+      facebook: 'https://www.facebook.com/marketplace/',
       instagram: null
     },
     location: {

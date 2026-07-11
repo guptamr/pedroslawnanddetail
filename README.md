@@ -40,20 +40,28 @@ git commit -m "Describe change"
 git push
 ```
 
-## Updating Pedro's contact info
+## Updating contact info
 
 Open [site.config.js](./site.config.js) and edit values under `contact`:
 
 ```js
 contact: {
-  phone: "+15195551234",             // add real phone
-  phoneDisplay: "(519) 555-1234",    // pretty-printed
-  email: "aliziapeters2000@gmail.com",
-  facebook: "https://www.facebook.com/..."  // add real Facebook page
+  phone: null,          // Not shown publicly — leave null
+  phoneDisplay: null,   // Not shown publicly — leave null
+  email: "aliziapeters2000@gmail.com",  // Used by the quote form (invisible to visitors)
+  facebook: "https://www.facebook.com/marketplace/profile/XXXXXXXXXX"  // Peter's real FB Marketplace URL
 }
 ```
 
-Elements that reference falsy config values (e.g. `phone: null`) auto-hide.
+The **Facebook** value is the primary contact channel visible on the site. To get Peter's real Marketplace URL:
+
+1. Open Peter's Marketplace profile in the Facebook app.
+2. Tap the **⋯** icon in the top-right corner.
+3. Choose **Copy link**.
+4. Paste the URL into `facebook` above.
+5. Commit and push — the site updates within ~60 seconds.
+
+Phone + Email cards are hidden from the site. The quote form still emails Peter behind the scenes.
 
 ## Contact form
 

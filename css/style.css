@@ -1164,6 +1164,27 @@ body.nav-open::after {
   border-color: var(--color-lawn-light);
   box-shadow: var(--shadow-sm);
 }
+
+/* Facebook — primary contact channel: brand-blue accent */
+.contact__card--primary {
+  background: linear-gradient(180deg, #EFF6FF 0%, var(--color-surface) 60%);
+  border-color: #BFDBFE;
+}
+.contact__card--primary:hover {
+  border-color: #1877F2;
+  box-shadow: var(--shadow-card);
+}
+.contact__icon--fb {
+  background: #0E5FC7;
+  color: #FFFFFF;
+}
+.contact__card--primary h3 {
+  color: #1E3A8A;
+}
+.contact__card--primary a {
+  color: #0E5FC7;
+  font-weight: 600;
+}
 .contact__icon {
   display: inline-flex;
   align-items: center;
