@@ -476,10 +476,33 @@
                 </div>
                 <div class="form__group">
                   <label for="message">Tell Us About the Job</label>
-                  <textarea id="message" name="message" rows="5" required placeholder="Describe the yard, vehicle, or job as clearly as possible. If you have photos, mention that below — we'll reply and you can send them back to us as an email attachment."></textarea>
+                  <textarea id="message" name="message" rows="5" required placeholder="Describe the yard, vehicle, or job. The more detail, the better the quote."></textarea>
+                </div>
+                <div class="form__group">
+                  <label for="photos">Attach Photos <span class="form__optional">(optional &mdash; up to 5 files, 10 MB total)</span></label>
+                  <div class="uploader" data-uploader>
+                    <input
+                      id="photos"
+                      class="uploader__input"
+                      type="file"
+                      name="attachments"
+                      multiple
+                      accept="image/*"
+                      data-uploader-input
+                    />
+                    <div class="uploader__area" data-uploader-area>
+                      <svg class="uploader__icon" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
+                        <path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <p class="uploader__prompt">Drop photos here or click to browse</p>
+                      <p class="uploader__note">JPG, PNG, HEIC &mdash; up to 5 files, 10&nbsp;MB total</p>
+                    </div>
+                    <ul class="uploader__list" data-uploader-list hidden></ul>
+                    <p class="uploader__error" data-uploader-error hidden></p>
+                  </div>
                 </div>
                 <p class="form__hint">
-                  <strong>Have photos?</strong> Submit the form first — we'll reply within one business day, and you can send photos directly as an attachment to that reply.
+                  Photos help us quote accurately. Prefer typing? Describing the job above is fine too.
                 </p>
                 <button type="submit" class="btn btn--cta btn--full btn--lg" data-form-submit>
                   <span data-form-submit-text>Request My Quote</span>
