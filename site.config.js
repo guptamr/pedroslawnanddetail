@@ -42,7 +42,7 @@
       // 6. Commit + push — the form activates immediately.
       // -----------------------------------------------------------------
       formId: 'yzct3bz18ap',
-      endpoint: 'https://app.forminit.com/f/yzct3bz18ap',
+      endpoint: 'https://forminit.com/f/yzct3bz18ap',
       redirectAfter: 'https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact',
       subject: "New quote request — Pedro's Lawn & Detail"
     }

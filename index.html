@@ -10,7 +10,7 @@
     />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; form-action https://app.forminit.com; object-src 'none'; base-uri 'self';"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; form-action https://forminit.com; object-src 'none'; base-uri 'self';"
     />
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -437,36 +437,32 @@
               <form
                 class="contact__form"
                 id="contactForm"
-                action="https://app.forminit.com/f/yzct3bz18ap"
+                action="https://forminit.com/f/yzct3bz18ap"
                 method="POST"
                 enctype="multipart/form-data"
                 data-form-endpoint="form.endpoint"
               >
-                <!-- Forminit configuration -->
-                <input type="hidden" name="_subject" value="New quote request — Pedro's Lawn &amp; Detail" data-form-subject="form.subject" />
-                <input type="hidden" name="_next" value="https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact" data-form-next="form.redirectAfter" />
-
-                <!-- Honeypot spam trap -->
+                <!-- Honeypot spam trap (Forminit ignores unknown fields; safe extra layer) -->
                 <label for="pl-honey" class="visually-hidden" aria-hidden="true">Leave this field empty</label>
                 <input id="pl-honey" type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form__honey" aria-hidden="true" />
 
                 <div class="form__row">
                   <div class="form__group">
                     <label for="name">Your Name</label>
-                    <input id="name" name="name" type="text" required autocomplete="name" />
+                    <input id="name" name="fi-sender-fullName" type="text" required autocomplete="name" />
                   </div>
                   <div class="form__group">
                     <label for="phone">Phone</label>
-                    <input id="phone" name="phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(519) 555-1234" />
+                    <input id="phone" name="fi-sender-phone" type="tel" required autocomplete="tel" inputmode="tel" placeholder="(519) 555-1234" />
                   </div>
                 </div>
                 <div class="form__group">
                   <label for="email">Email <span class="form__optional">(optional)</span></label>
-                  <input id="email" name="email" type="email" autocomplete="email" inputmode="email" />
+                  <input id="email" name="fi-sender-email" type="email" autocomplete="email" inputmode="email" />
                 </div>
                 <div class="form__group">
                   <label for="service">Service Needed</label>
-                  <select id="service" name="service" required>
+                  <select id="service" name="fi-select-service" required>
                     <option value="" disabled selected>Select a service</option>
                     <option value="Lawn Care">Lawn Care</option>
                     <option value="Yard Cleanup">Yard Cleanup</option>
@@ -476,7 +472,7 @@
                 </div>
                 <div class="form__group">
                   <label for="message">Tell Us About the Job</label>
-                  <textarea id="message" name="message" rows="5" required placeholder="Describe the yard, vehicle, or job. The more detail, the better the quote."></textarea>
+                  <textarea id="message" name="fi-text-message" rows="5" required placeholder="Describe the yard, vehicle, or job. The more detail, the better the quote."></textarea>
                 </div>
                 <div class="form__group">
                   <label for="photos">Attach Photos <span class="form__optional">(optional &mdash; up to 5 files, 10 MB total)</span></label>
@@ -485,7 +481,7 @@
                       id="photos"
                       class="uploader__input"
                       type="file"
-                      name="attachments"
+                      name="fi-file-attachments[]"
                       multiple
                       accept="image/*"
                       data-uploader-input
