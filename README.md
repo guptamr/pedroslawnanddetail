@@ -40,6 +40,20 @@ git commit -m "Describe change"
 git push
 ```
 
+## Contact form (Web3Forms)
+
+The quote form on the live site posts to [Web3Forms](https://web3forms.com/) which emails submissions (plus any attached photos) to whichever address you configure.
+
+### One-time setup
+
+1. Go to https://web3forms.com/ and enter Peter's email (e.g. `aliziapeters2000@gmail.com`).
+2. Click the verification link Web3Forms emails you.
+3. Copy the access key they display.
+4. Open [`site.config.js`](./site.config.js) and replace `YOUR-WEB3FORMS-ACCESS-KEY-HERE` with the real key.
+5. Commit and push. The form activates immediately.
+
+**Free tier limits:** 250 submissions/month, up to 5 files + 10 MB total per submission. No credit card required.
+
 ## Updating contact info
 
 Open [site.config.js](./site.config.js) and edit values under `contact`:
@@ -48,20 +62,13 @@ Open [site.config.js](./site.config.js) and edit values under `contact`:
 contact: {
   phone: null,          // Not shown publicly — leave null
   phoneDisplay: null,   // Not shown publicly — leave null
-  email: "aliziapeters2000@gmail.com",  // Used by the quote form (invisible to visitors)
-  facebook: "https://www.facebook.com/marketplace/profile/XXXXXXXXXX"  // Peter's real FB Marketplace URL
+  email: "aliziapeters2000@gmail.com",  // Only used for reference; the form goes via Web3Forms
+  facebook: null,       // Not shown publicly — leave null
+  instagram: null
 }
 ```
 
-The **Facebook** value is the primary contact channel visible on the site. To get Peter's real Marketplace URL:
-
-1. Open Peter's Marketplace profile in the Facebook app.
-2. Tap the **⋯** icon in the top-right corner.
-3. Choose **Copy link**.
-4. Paste the URL into `facebook` above.
-5. Commit and push — the site updates within ~60 seconds.
-
-Phone + Email cards are hidden from the site. The quote form still emails Peter behind the scenes.
+The public site currently exposes **no** direct phone / email / social channels — the contact form is the only inbound route. Set any of the above to a real value if you later want to expose it (the site config-binder will wire it up automatically for future contact cards).
 
 ## Contact form
 

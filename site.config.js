@@ -11,19 +11,12 @@
       tagline: 'Local lawn care & car detailing in St. Thomas, Ontario'
     },
     contact: {
-      // Phone + Email intentionally not exposed on the public site.
-      // The contact form still routes email to `form.endpoint` below (invisible to visitors).
-      // ------------------------------------------------------------
-      // TODO: replace `facebook` with Peter's actual Marketplace profile URL.
-      // How to grab it: open Peter's Marketplace profile in the Facebook app
-      //   → tap the ⋯ in the top-right → "Copy link"
-      //   → paste it here (should look like
-      //     https://www.facebook.com/marketplace/profile/1234567890 or
-      //     https://www.facebook.com/peta.harder).
+      // Phone / email / social channels are intentionally hidden from the public site.
+      // The contact form (Web3Forms) is the only visible way to reach the business.
       phone: null,
       phoneDisplay: null,
       email: 'aliziapeters2000@gmail.com',
-      facebook: 'https://www.facebook.com/marketplace/',
+      facebook: null,
       instagram: null
     },
     location: {
@@ -33,7 +26,22 @@
       areaServed: 'St. Thomas and surrounding areas'
     },
     form: {
-      endpoint: 'https://formsubmit.co/aliziapeters2000@gmail.com',
+      // -----------------------------------------------------------------
+      // WEB3FORMS SETUP (one-time, ~30 seconds)
+      // -----------------------------------------------------------------
+      // 1. Go to https://web3forms.com/
+      // 2. Enter Peter's real email (e.g. aliziapeters2000@gmail.com)
+      //    — this is where quote requests + attached photos will arrive.
+      // 3. Click the verification link Web3Forms emails you.
+      // 4. Copy the access key they show you.
+      // 5. Paste it below in place of YOUR-WEB3FORMS-ACCESS-KEY-HERE.
+      // 6. Commit + push — the form starts working immediately.
+      //
+      // Free tier: 250 submissions/month, up to 5 files, 10 MB total per
+      // submission. No credit card required.
+      // -----------------------------------------------------------------
+      accessKey: 'YOUR-WEB3FORMS-ACCESS-KEY-HERE',
+      endpoint: 'https://api.web3forms.com/submit',
       redirectAfter: 'https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact',
       subject: "New quote request — Pedro's Lawn & Detail"
     }

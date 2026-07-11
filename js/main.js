@@ -66,6 +66,10 @@
     var endpoint = getConfigValue('form.endpoint');
     if (endpoint) form.setAttribute('action', endpoint);
 
+    var keyInput = form.querySelector('[data-form-key]');
+    var keyVal = getConfigValue('form.accessKey');
+    if (keyInput && keyVal) keyInput.value = keyVal;
+
     var nextInput = form.querySelector('[data-form-next]');
     var nextVal = getConfigValue('form.redirectAfter');
     if (nextInput && nextVal) nextInput.value = nextVal;
@@ -340,11 +344,126 @@
   /* -----------------------------------------------------------
      8. FORM UX
      ----------------------------------------------------------- */
+  var MAX_UPLOAD_FILES = 5;
+  var MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10 MB total
+
+  function humanBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function initFileUploader() {
+    var uploader = document.querySelector('[data-uploader]');
+    if (!uploader) return;
+    var input = uploader.querySelector('[data-uploader-input]');
+    var area = uploader.querySelector('[data-uploader-area]');
+    var list = uploader.querySelector('[data-uploader-list]');
+    var errorEl = uploader.querySelector('[data-uploader-error]');
+    if (!input || !area) return;
+
+    function showError(msg) {
+      if (!errorEl) return;
+      errorEl.textContent = msg;
+      errorEl.hidden = false;
+    }
+    function clearError() {
+      if (!errorEl) return;
+      errorEl.hidden = true;
+      errorEl.textContent = '';
+    }
+
+    function refreshList() {
+      var files = input.files ? Array.prototype.slice.call(input.files) : [];
+      list.innerHTML = '';
+
+      // Validate count
+      if (files.length > MAX_UPLOAD_FILES) {
+        showError('Please attach no more than ' + MAX_UPLOAD_FILES + ' photos.');
+        try { input.value = ''; } catch (_) { /* IE quirk */ }
+        list.hidden = true;
+        return;
+      }
+
+      // Validate total size
+      var total = 0;
+      files.forEach(function (f) { total += f.size; });
+      if (total > MAX_UPLOAD_BYTES) {
+        showError('Total file size is ' + humanBytes(total) +
+                  '. Please keep it under ' + humanBytes(MAX_UPLOAD_BYTES) + '.');
+        try { input.value = ''; } catch (_) { /* noop */ }
+        list.hidden = true;
+        return;
+      }
+
+      clearError();
+
+      // Render file list
+      files.forEach(function (file) {
+        var li = document.createElement('li');
+        li.className = 'uploader__item';
+
+        var name = document.createElement('span');
+        name.className = 'uploader__name';
+        name.textContent = file.name;
+
+        var size = document.createElement('span');
+        size.className = 'uploader__size';
+        size.textContent = humanBytes(file.size);
+
+        li.appendChild(name);
+        li.appendChild(size);
+        list.appendChild(li);
+      });
+      list.hidden = files.length === 0;
+    }
+
+    input.addEventListener('change', refreshList);
+
+    // Drag & drop — browser default is to open the file, so we prevent that
+    ['dragenter', 'dragover'].forEach(function (ev) {
+      area.addEventListener(ev, function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        area.classList.add('is-dragover');
+      });
+    });
+    ['dragleave', 'drop'].forEach(function (ev) {
+      area.addEventListener(ev, function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        area.classList.remove('is-dragover');
+      });
+    });
+    area.addEventListener('drop', function (e) {
+      var dt = e.dataTransfer;
+      if (!dt || !dt.files || dt.files.length === 0) return;
+      try {
+        input.files = dt.files;
+      } catch (err) {
+        showError('Your browser does not support drag-and-drop uploads. Please click to browse.');
+        return;
+      }
+      refreshList();
+    });
+
+    // Block form submit if there are pending validation errors
+    var form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', function (e) {
+        if (errorEl && !errorEl.hidden) {
+          e.preventDefault();
+          errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    }
+  }
+
   function initFormUX() {
     var form = document.getElementById('contactForm');
     var status = document.getElementById('formStatus');
 
-    // Show success banner if returning from FormSubmit with ?thanks=1
+    // Show success banner if returning after form submission (?thanks=1)
     try {
       var params = new URLSearchParams(window.location.search);
       if (params.has('thanks') && status) {
@@ -353,7 +472,6 @@
         status.textContent =
           "Thanks! We received your quote request and will get back to you shortly.";
         if (form) form.reset();
-        // Scroll banner into view + clean URL
         setTimeout(function () {
           status.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 200);
@@ -393,6 +511,7 @@
     initGalleryFilters();
     initLightbox();
     initScrollReveal();
+    initFileUploader();
     initFormUX();
     initFooterYear();
   }
