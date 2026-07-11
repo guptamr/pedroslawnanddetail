@@ -41,8 +41,8 @@
       // 5. Paste just the form ID (the bit after /f/) into `formId` below.
       // 6. Commit + push — the form activates immediately.
       // -----------------------------------------------------------------
-      formId: 'YOUR-FORMINIT-FORM-ID',
-      endpoint: 'https://app.forminit.com/f/YOUR-FORMINIT-FORM-ID',
+      formId: 'yzct3bz18ap',
+      endpoint: 'https://app.forminit.com/f/yzct3bz18ap',
       redirectAfter: 'https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact',
       subject: "New quote request — Pedro's Lawn & Detail"
     }

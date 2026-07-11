@@ -428,19 +428,18 @@
               <form
                 class="contact__form"
                 id="contactForm"
-                action="https://api.web3forms.com/submit"
+                action="https://app.forminit.com/f/yzct3bz18ap"
                 method="POST"
+                enctype="multipart/form-data"
                 data-form-endpoint="form.endpoint"
               >
-                <!-- Web3Forms configuration -->
-                <input type="hidden" name="access_key" value="89ae1b8a-bcdc-4379-94f3-cf06d5104b0b" data-form-key="form.accessKey" />
-                <input type="hidden" name="subject" value="New quote request — Pedro's Lawn &amp; Detail" data-form-subject="form.subject" />
-                <input type="hidden" name="from_name" value="Pedro's Lawn &amp; Detail website" />
-                <input type="hidden" name="redirect" value="https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact" data-form-next="form.redirectAfter" />
+                <!-- Forminit configuration -->
+                <input type="hidden" name="_subject" value="New quote request — Pedro's Lawn &amp; Detail" data-form-subject="form.subject" />
+                <input type="hidden" name="_next" value="https://guptamr.github.io/pedroslawnanddetail/?thanks=1#contact" data-form-next="form.redirectAfter" />
 
-                <!-- Honeypot (Web3Forms convention) -->
+                <!-- Honeypot spam trap -->
                 <label for="pl-honey" class="visually-hidden" aria-hidden="true">Leave this field empty</label>
-                <input id="pl-honey" type="checkbox" name="botcheck" class="form__honey" tabindex="-1" aria-hidden="true" />
+                <input id="pl-honey" type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="form__honey" aria-hidden="true" />
 
                 <div class="form__row">
                   <div class="form__group">
