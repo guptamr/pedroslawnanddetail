@@ -24,7 +24,7 @@ All work-gallery images are **real before-and-after photos** supplied by Pedro. 
 | File | Source | Notes |
 |---|---|---|
 | `detailing/car-floor-mat-single-before-after.jpg` | Pedro (real photo, collage) | Single-side floor mat + sill cleanup |
-| `detailing/car-passenger-floor-before-after.jpg` | Pedro (real photo, collage) | Passenger floor mat + carpet detail |
+| `detailing/car-rear-floor-before-after.jpg` | Pedro (real photo, collage) | Rear passenger footwell — dirty carpet w/ debris → deep-cleaned + new rubber mat installed |
 | `detailing/car-driver-floor-before-after.jpg` | Pedro (real photo, collage) | Driver floor mat + carpet detail |
 
 ## AI / stock imagery
