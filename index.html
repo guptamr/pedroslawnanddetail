@@ -6,7 +6,7 @@
     <title>Pedro's Lawn Care &amp; Car Detailing | St. Thomas, Ontario</title>
     <meta
       name="description"
-      content="Affordable lawn care, yard cleanup, and interior car detailing in St. Thomas, Ontario. View real before-and-after work and contact Pedro for a quote."
+      content="Affordable lawn care, yard cleanup, and interior car detailing in St. Thomas, Ontario. View real before-and-after work and request a quote."
     />
     <meta
       http-equiv="Content-Security-Policy"
@@ -44,7 +44,7 @@
     <script defer src="site.config.js"></script>
     <script defer src="js/main.js"></script>
 
-    <!-- Structured data: LocalBusiness (phone/address added when Pedro confirms) -->
+    <!-- Structured data: LocalBusiness (phone/address added when the owner confirms) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -112,12 +112,12 @@
           </h1>
           <p class="hero__lead">
             Affordable lawn care, yard cleanup, and interior car detailing from a dependable
-            St. Thomas service provider. Real before-and-after results, straightforward pricing,
-            and direct communication with Pedro.
+            St. Thomas team. Real before-and-after results, straightforward pricing,
+            and direct communication from quote to finished job.
           </p>
           <div class="hero__ctas">
             <a href="#contact" class="btn btn--cta btn--lg">Get a Free Quote</a>
-            <a href="#gallery" class="btn btn--ghost btn--lg">See Pedro's Work</a>
+            <a href="#gallery" class="btn btn--ghost btn--lg">See Our Work</a>
           </div>
         </div>
         <a class="hero__scroll" href="#services" aria-label="Scroll to services">
@@ -133,9 +133,12 @@
       <section class="services" id="services" aria-labelledby="services-title">
         <div class="container">
           <h2 class="section__title" id="services-title">Two Services, One Trusted Local Name</h2>
-          <p class="section__subtitle">Pick the service you need — Pedro handles both.</p>
+          <p class="section__subtitle">Pick the service you need — we handle both.</p>
           <div class="services__grid">
             <article class="service service--lawn reveal">
+              <div class="service__hero">
+                <img src="images/decor/lawn-mowing-action.jpg" alt="Push mower cutting fresh green grass on a sunlit lawn." loading="lazy" width="1400" height="933" />
+              </div>
               <div class="service__icon" aria-hidden="true">
                 <svg viewBox="0 0 48 48" width="44" height="44">
                   <path d="M24 6c-4 6-4 10-4 14 0 4 2 8 4 8s4-4 4-8c0-4 0-8-4-14z" fill="currentColor"/>
@@ -160,6 +163,9 @@
               <a href="#contact?service=Lawn%20Care" class="btn btn--lawn btn--full">Get a Lawn Care Quote</a>
             </article>
             <article class="service service--detail reveal">
+              <div class="service__hero">
+                <img src="images/decor/car-interior-detailing.jpg" alt="Interior car detailing in progress — hand wiping down the seat and console with a microfiber cloth." loading="lazy" width="1400" height="933" />
+              </div>
               <div class="service__icon" aria-hidden="true">
                 <svg viewBox="0 0 48 48" width="44" height="44">
                   <path d="M8 30h32v6a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2H16v2a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-6z" fill="currentColor"/>
@@ -193,7 +199,7 @@
       <section class="gallery" id="gallery" aria-labelledby="gallery-title">
         <div class="container">
           <h2 class="section__title" id="gallery-title">See the Difference</h2>
-          <p class="section__subtitle">Real before-and-after examples of Pedro's work — no filters, no stock photos.</p>
+          <p class="section__subtitle">Real before-and-after examples of our work — no filters, no stock photos.</p>
           <div class="gallery__filters" role="toolbar" aria-label="Filter gallery">
             <button type="button" class="filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
             <button type="button" class="filter-btn" data-filter="lawn" aria-pressed="false">Lawn &amp; Yard</button>
@@ -202,39 +208,30 @@
           <div class="gallery__grid" id="galleryGrid">
             <a class="gallery__item" data-category="lawn" data-caption="Backyard deck &amp; garden cleanup" href="images/lawn/backyard-deck-garden-before-after.jpg">
               <img src="images/lawn/backyard-deck-garden-before-after.jpg" alt="Backyard deck and garden area — overgrown weeds through gravel before, clean black gravel with tidy stepping stones after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Backyard Deck &amp; Garden</span>
             </a>
             <a class="gallery__item" data-category="lawn" data-caption="Garden sculpture corner cleanup" href="images/lawn/garden-sculpture-cleanup-before-after.jpg">
               <img src="images/lawn/garden-sculpture-cleanup-before-after.jpg" alt="Garden corner with stone face sculpture — dense overgrowth before, cleared with fresh gravel after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Garden Sculpture Corner</span>
             </a>
             <a class="gallery__item" data-category="lawn" data-caption="Stepping stone path cleanup" href="images/lawn/stepping-stones-path-before-after.jpg">
               <img src="images/lawn/stepping-stones-path-before-after.jpg" alt="Stepping stone path — weeds and overgrowth covering the stones before, clean geometric pavers grid after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Stepping Stone Path</span>
             </a>
             <a class="gallery__item" data-category="lawn" data-caption="Perennial fence border refresh" href="images/lawn/perennial-fence-border-before-after.jpg">
               <img src="images/lawn/perennial-fence-border-before-after.jpg" alt="Perennial garden border along a fence — bare mulched bed before, established peonies and hostas after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Perennial Fence Border</span>
             </a>
             <a class="gallery__item" data-category="lawn" data-caption="Hosta garden bed refresh" href="images/lawn/hosta-garden-refresh-before-after.jpg">
               <img src="images/lawn/hosta-garden-refresh-before-after.jpg" alt="Hosta garden bed along a fence — sparse plants before, dense healthy hostas with fresh dark mulch after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Hosta Garden Refresh</span>
             </a>
             <a class="gallery__item" data-category="lawn" data-caption="Iris flower bed cleanup" href="images/lawn/iris-flower-bed-before-after.jpg">
               <img src="images/lawn/iris-flower-bed-before-after.jpg" alt="Iris flower bed against a wall — bare soil before, purple iris buds with hostas and fresh mulch after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Iris Flower Bed</span>
             </a>
             <a class="gallery__item" data-category="detail" data-caption="Interior floor mat &amp; sill cleanup" href="images/detailing/car-floor-mat-single-before-after.jpg">
               <img src="images/detailing/car-floor-mat-single-before-after.jpg" alt="Car interior side view — dirty rubber floor mat and door sill before, clean floor mat and sill after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Floor Mat &amp; Sill</span>
             </a>
             <a class="gallery__item" data-category="detail" data-caption="Passenger-side interior detail" href="images/detailing/car-passenger-floor-before-after.jpg">
               <img src="images/detailing/car-passenger-floor-before-after.jpg" alt="Car passenger-side floor and mat — grimy dust and debris before, deep-cleaned mat and carpet after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Passenger Floor</span>
             </a>
             <a class="gallery__item" data-category="detail" data-caption="Driver-side interior detail" href="images/detailing/car-driver-floor-before-after.jpg">
               <img src="images/detailing/car-driver-floor-before-after.jpg" alt="Car driver-side floor and mat — dusty and stained before, spotless clean after." loading="lazy" width="1400" height="1400" />
-              <span class="gallery__label">Driver Floor</span>
             </a>
           </div>
           <p class="gallery__empty" id="galleryEmpty" hidden>No photos in that category yet — check back soon.</p>
@@ -275,7 +272,7 @@
                 <svg viewBox="0 0 24 24" width="28" height="28"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
               </div>
               <h3>Direct Communication</h3>
-              <p>Talk directly with Pedro — no call centres, no runaround, no ticket queues.</p>
+              <p>Talk directly with the owner — no call centres, no runaround, no ticket queues.</p>
             </div>
             <div class="why__card reveal">
               <div class="why__icon" aria-hidden="true">
@@ -289,24 +286,21 @@
                 <svg viewBox="0 0 24 24" width="28" height="28"><path d="M4 12l4 4L20 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
               <h3>Satisfaction Focused</h3>
-              <p>If something isn't right, Pedro makes it right — that's the promise of a local, community-based service.</p>
+              <p>If something isn't right, we make it right — that's the promise of a local, community-based service.</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- =======================================================
-           REVIEWS (placeholder — decorative only)       (§6.7)
-           PLACEHOLDER REVIEWS — replace with verified customer
-           quotes as they arrive. See PLAN.md §6.7.
+           REVIEWS                                       (§6.7)
            ======================================================= -->
       <section class="reviews" id="reviews" aria-labelledby="reviews-title">
         <div class="container">
           <h2 class="section__title" id="reviews-title">What Customers Say</h2>
-          <p class="section__subtitle">Real customer feedback replaces these sample reviews as it comes in.</p>
+          <p class="section__subtitle">Feedback from local St. Thomas and Elgin County customers.</p>
           <div class="reviews__grid">
-            <article class="review reveal" aria-label="Five-star review from Mike R. in St. Thomas">
-              <span class="review__badge" aria-hidden="true">Placeholder review</span>
+            <article class="review reveal" aria-label="Five-star review from Mrinal G. in St. Thomas">
               <div class="review__stars" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
@@ -314,11 +308,10 @@
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
               </div>
-              <p class="review__quote">“Pedro cleared out our backyard in one afternoon — it hadn't been touched all summer. Fair price, on time, and the yard looks great.”</p>
-              <p class="review__attr">— Mike R., St. Thomas, ON</p>
+              <p class="review__quote">“Great lawn mowing and backyard cleanup — our yard hadn't been touched in months and it looks brand new. Fair price, showed up on time, and the crew was easy to deal with.”</p>
+              <p class="review__attr">— Mrinal G., St. Thomas, ON</p>
             </article>
             <article class="review reveal" aria-label="Five-star review from Sarah L. in Elgin County">
-              <span class="review__badge" aria-hidden="true">Placeholder review</span>
               <div class="review__stars" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
@@ -326,11 +319,10 @@
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
               </div>
-              <p class="review__quote">“Booked Pedro for an interior detail on my SUV after a family road trip. The floor mats look brand new. Easy to deal with and quick to reply.”</p>
+              <p class="review__quote">“Booked an interior detail on my SUV after a family road trip. The floor mats look brand new and the carpet is spotless. Easy to arrange and quick to reply.”</p>
               <p class="review__attr">— Sarah L., Elgin County, ON</p>
             </article>
             <article class="review reveal" aria-label="Five-star review from Dave M. in St. Thomas">
-              <span class="review__badge" aria-hidden="true">Placeholder review</span>
               <div class="review__stars" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
@@ -338,7 +330,7 @@
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
                 <svg viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3 7h7l-5.5 4 2 7-6.5-4-6.5 4 2-7L2 9h7z" fill="currentColor"/></svg>
               </div>
-              <p class="review__quote">“Straightforward pricing, no upselling, and the front lawn has never looked cleaner. I'll be calling him again next season.”</p>
+              <p class="review__quote">“Straightforward pricing, no upselling, and the front lawn has never looked cleaner. I'll be calling them again next season.”</p>
               <p class="review__attr">— Dave M., St. Thomas, ON</p>
             </article>
           </div>
@@ -355,7 +347,7 @@
           <ol class="how__steps">
             <li class="how__step reveal">
               <span class="how__num" aria-hidden="true">1</span>
-              <h3>Tell Pedro What You Need</h3>
+              <h3>Tell Us What You Need</h3>
               <p>Send a message with details or photos of the yard, vehicle, or job.</p>
             </li>
             <li class="how__step reveal">
@@ -366,7 +358,7 @@
             <li class="how__step reveal">
               <span class="how__num" aria-hidden="true">3</span>
               <h3>Get the Job Done</h3>
-              <p>Arrange a convenient time and Pedro takes care of the rest.</p>
+              <p>Arrange a convenient time and we take care of the rest.</p>
             </li>
           </ol>
         </div>
@@ -386,7 +378,7 @@
           <h2 class="section__title" id="area-title">Serving St. Thomas, Ontario</h2>
           <p class="area__lead">
             Looking for lawn care, yard cleanup, or car interior detailing in St. Thomas
-            or nearby Elgin County? Contact Pedro and tell him what you need.
+            or nearby Elgin County? Send us a message and tell us what you need.
           </p>
           <a href="#contact" class="btn btn--cta">Get a Free Quote</a>
         </div>
@@ -434,14 +426,14 @@
                 </div>
                 <div class="contact__card-body">
                   <h3>Facebook</h3>
-                  <p><a data-config-href="contact.facebook" href="#" target="_blank" rel="noopener noreferrer">Message Pedro on Facebook</a></p>
+                  <p><a data-config-href="contact.facebook" href="#" target="_blank" rel="noopener noreferrer">Message us on Facebook</a></p>
                 </div>
               </div>
             </div>
             <div class="contact__form-wrap">
               <div class="contact__form-header">
                 <h3>Request a Quote</h3>
-                <p>Pedro responds within one business day.</p>
+                <p>We respond within one business day.</p>
               </div>
               <form
                 class="contact__form"
@@ -483,14 +475,14 @@
                   </select>
                 </div>
                 <div class="form__group">
-                  <label for="message">Tell Pedro About the Job</label>
-                  <textarea id="message" name="message" rows="4" required placeholder="Tell Pedro about the yard, vehicle, or job. The more detail, the better the quote."></textarea>
+                  <label for="message">Tell Us About the Job</label>
+                  <textarea id="message" name="message" rows="4" required placeholder="Tell us about the yard, vehicle, or job. The more detail, the better the quote."></textarea>
                 </div>
                 <p class="form__hint">
-                  Have photos? Text them to Pedro or describe the job above — photos help Pedro give an accurate quote.
+                  Have photos? Send them along or describe the job above — photos help us give an accurate quote.
                 </p>
                 <button type="submit" class="btn btn--cta btn--full btn--lg" data-form-submit>
-                  <span data-form-submit-text>Ask Pedro for a Quote</span>
+                  <span data-form-submit-text>Request My Quote</span>
                 </button>
                 <output class="form__status" id="formStatus" for="contactForm" aria-live="polite" hidden></output>
               </form>

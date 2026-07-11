@@ -351,7 +351,7 @@
         status.hidden = false;
         status.classList.add('is-success');
         status.textContent =
-          "Thanks! Pedro received your quote request and will get back to you shortly.";
+          "Thanks! We received your quote request and will get back to you shortly.";
         if (form) form.reset();
         // Scroll banner into view + clean URL
         setTimeout(function () {
