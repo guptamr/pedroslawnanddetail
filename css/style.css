@@ -497,7 +497,9 @@ button {
   gap: 0.25rem;
   transform: translateX(102%);
   transition: transform var(--dur) var(--ease);
-  z-index: auto;
+  /* transform creates a stacking context — explicit z-index ensures
+     this context participates at a positive layer within header (9999) */
+  z-index: 1;
   overflow-y: auto;
 }
 .primary-nav.is-open {
