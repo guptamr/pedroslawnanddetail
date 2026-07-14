@@ -20,6 +20,18 @@
     return value == null || value === '' ? null : value;
   }
 
+  /* Compression settings */
+  var MAX_UPLOAD_FILES = 5;
+  var COMPRESS_MAX_PX  = 1200;   // resize longest side to this
+  var COMPRESS_QUALITY = 0.65;   // JPEG quality ~65%
+  var compressedFiles  = [];     // [{blob, name, size}]
+
+  function humanBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
   function bindConfig() {
     // 1a. Hide blocks whose required config value is falsy
     Array.prototype.forEach.call(
@@ -109,13 +121,19 @@
      ----------------------------------------------------------- */
   function initMobileNav() {
     var toggle = document.querySelector('[data-nav-toggle]');
-    var nav = document.getElementById('primary-nav');
+    var nav    = document.getElementById('primary-nav');
+    var bdrop  = document.getElementById('navBackdrop');
     if (!toggle || !nav) return;
 
     function setOpen(open) {
       toggle.setAttribute('aria-expanded', String(open));
       nav.classList.toggle('is-open', open);
       document.body.classList.toggle('nav-open', open);
+      if (bdrop) {
+        bdrop.hidden = !open;
+        if (open) bdrop.style.display = 'block';
+        else bdrop.style.display = '';
+      }
     }
 
     toggle.addEventListener('click', function () {
@@ -123,7 +141,7 @@
       setOpen(!isOpen);
     });
 
-    // Close on any nav-link click (mobile only — desktop reset below)
+    // Close on any nav-link click
     Array.prototype.forEach.call(nav.querySelectorAll('[data-nav-link]'), function (link) {
       link.addEventListener('click', function () { setOpen(false); });
     });
@@ -133,14 +151,19 @@
       if (e.key === 'Escape' && nav.classList.contains('is-open')) setOpen(false);
     });
 
-    // Backdrop tap closes (click outside nav + toggle)
-    document.addEventListener('click', function (e) {
-      if (!nav.classList.contains('is-open')) return;
-      if (nav.contains(e.target) || toggle.contains(e.target)) return;
-      setOpen(false);
-    });
+    // Backdrop click closes
+    if (bdrop) {
+      bdrop.addEventListener('click', function () { setOpen(false); });
+    } else {
+      // Fallback: click outside nav
+      document.addEventListener('click', function (e) {
+        if (!nav.classList.contains('is-open')) return;
+        if (nav.contains(e.target) || toggle.contains(e.target)) return;
+        setOpen(false);
+      });
+    }
 
-    // Reset when viewport crosses to tablet+
+    // Reset at tablet+
     var mql = window.matchMedia('(min-width: 768px)');
     var onChange = function () { if (mql.matches) setOpen(false); };
     if (typeof mql.addEventListener === 'function') mql.addEventListener('change', onChange);
@@ -345,133 +368,6 @@
   /* -----------------------------------------------------------
      8. FORM UX
      ----------------------------------------------------------- */
-  var MAX_UPLOAD_FILES = 5;
-  var MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // 10 MB total
-
-  function humanBytes(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
-  }
-
-  function initFileUploader() {
-    var uploader = document.querySelector('[data-uploader]');
-    if (!uploader) return;
-    var input = uploader.querySelector('[data-uploader-input]');
-    var area = uploader.querySelector('[data-uploader-area]');
-    var list = uploader.querySelector('[data-uploader-list]');
-    var errorEl = uploader.querySelector('[data-uploader-error]');
-    if (!input || !area) return;
-
-    function showError(msg) {
-      if (!errorEl) return;
-      errorEl.textContent = msg;
-      errorEl.hidden = false;
-    }
-    function clearError() {
-      if (!errorEl) return;
-      errorEl.hidden = true;
-      errorEl.textContent = '';
-    }
-
-    function refreshList() {
-      var files = input.files ? Array.prototype.slice.call(input.files) : [];
-      list.innerHTML = '';
-
-      // Validate count
-      if (files.length > MAX_UPLOAD_FILES) {
-        showError('Please attach no more than ' + MAX_UPLOAD_FILES + ' photos.');
-        try { input.value = ''; } catch (_) { /* IE quirk */ }
-        list.hidden = true;
-        return;
-      }
-
-      // Validate total size
-      var total = 0;
-      files.forEach(function (f) { total += f.size; });
-      if (total > MAX_UPLOAD_BYTES) {
-        showError('Total file size is ' + humanBytes(total) +
-                  '. Please keep it under ' + humanBytes(MAX_UPLOAD_BYTES) + '.');
-        try { input.value = ''; } catch (_) { /* noop */ }
-        list.hidden = true;
-        return;
-      }
-
-      clearError();
-
-      // Render file list
-      files.forEach(function (file) {
-        var li = document.createElement('li');
-        li.className = 'uploader__item';
-
-        var name = document.createElement('span');
-        name.className = 'uploader__name';
-        name.textContent = file.name;
-
-        var size = document.createElement('span');
-        size.className = 'uploader__size';
-        size.textContent = humanBytes(file.size);
-
-        li.appendChild(name);
-        li.appendChild(size);
-        list.appendChild(li);
-      });
-      list.hidden = files.length === 0;
-    }
-
-    input.addEventListener('change', refreshList);
-    // Also listen for the custom event we dispatch after drag-and-drop
-    input.addEventListener('forminit-refresh', refreshList);
-
-    // Drag & drop — browser default is to open the file, so we prevent that
-    ['dragenter', 'dragover'].forEach(function (ev) {
-      area.addEventListener(ev, function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        area.classList.add('is-dragover');
-      });
-    });
-    ['dragleave', 'drop'].forEach(function (ev) {
-      area.addEventListener(ev, function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        area.classList.remove('is-dragover');
-      });
-    });
-    area.addEventListener('drop', function (e) {
-      var dt = e.dataTransfer;
-      if (!dt || !dt.files || dt.files.length === 0) return;
-      try {
-        input.files = dt.files;
-      } catch (err) {
-        showError('Your browser does not support drag-and-drop uploads. Please click to browse.');
-        return;
-      }
-      // Explicitly call refreshList — programmatic file set may not fire 'change'
-      refreshList();
-    });
-
-    // Fallback: if native click-to-browse doesn't fire 'change' in some browsers,
-    // a MutationObserver on the list will not help — instead we poll once on focus loss
-    input.addEventListener('blur', function () {
-      // Re-run in case change event was missed
-      if (input.files && input.files.length > 0 && !list.children.length) {
-        refreshList();
-      }
-    });
-
-    // Block form submit if there are pending validation errors
-    var form = document.getElementById('contactForm');
-    if (form) {
-      form.addEventListener('submit', function (e) {
-        if (errorEl && !errorEl.hidden) {
-          e.preventDefault();
-          errorEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      });
-    }
-  }
-
   function initFormUX() {
     var form = document.getElementById('contactForm');
     var status = document.getElementById('formStatus');
@@ -517,9 +413,16 @@
       var formId = getConfigValue('form.formId') || 'yzct3bz18ap';
       var endpoint = 'https://forminit.com/f/' + formId;
 
+      // Build FormData — use compressed images instead of raw input files
+      var fd = new FormData(form);
+      try { fd.delete('fi-file-attachments[]'); } catch (_) { /* older browsers */ }
+      compressedFiles.forEach(function (f) {
+        fd.append('fi-file-attachments[]', f.blob, f.name);
+      });
+
       fetch(endpoint, {
         method: 'POST',
-        body: new FormData(form),
+        body: fd,
         redirect: 'manual'   // capture Forminit's 302 without following it
       })
       .then(function (res) {

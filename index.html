@@ -475,8 +475,15 @@
                   <textarea id="message" name="fi-text-message" rows="5" required placeholder="Describe the yard, vehicle, or job. The more detail, the better the quote."></textarea>
                 </div>
                 <div class="form__group">
-                  <label for="photos">Attach Photos <span class="form__optional">(optional &mdash; up to 5 files, 10 MB total)</span></label>
+                  <label for="photos">Attach Photos <span class="form__optional">(optional &mdash; up to 5 files)</span></label>
                   <div class="uploader" data-uploader>
+                    <label for="photos" class="uploader__area" data-uploader-area>
+                      <svg class="uploader__icon" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
+                        <path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      <p class="uploader__prompt">Drop photos here or <span class="uploader__browse">click to browse</span></p>
+                      <p class="uploader__note">JPG, PNG, HEIC &mdash; up to 5 photos, auto-compressed</p>
+                    </label>
                     <input
                       id="photos"
                       class="uploader__input"
@@ -486,13 +493,6 @@
                       accept="image/*"
                       data-uploader-input
                     />
-                    <div class="uploader__area" data-uploader-area>
-                      <svg class="uploader__icon" viewBox="0 0 24 24" width="36" height="36" aria-hidden="true">
-                        <path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                      <p class="uploader__prompt">Drop photos here or click to browse</p>
-                      <p class="uploader__note">JPG, PNG, HEIC &mdash; up to 5 files, 10&nbsp;MB total</p>
-                    </div>
                     <ul class="uploader__list" data-uploader-list hidden></ul>
                     <p class="uploader__error" data-uploader-error hidden></p>
                   </div>
@@ -543,6 +543,9 @@
         </div>
       </div>
     </footer>
+
+    <!-- Nav backdrop (dedicated element — avoids body::after pointer-event interference) -->
+    <div id="navBackdrop" aria-hidden="true" hidden></div>
 
     <!-- =========================================================
          LIGHTBOX (native <dialog>)                      (§6.5)
