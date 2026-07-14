@@ -526,14 +526,14 @@ body.nav-open {
   overflow: hidden;
 }
 
-/* Backdrop — below the header (9999) so it dims the page; header/nav/toggle remain clickable */
+/* Backdrop — visual dimming only, pointer-events:none so nav links are never blocked */
 #navBackdrop {
   position: fixed;
   inset: 0;
   z-index: 9998;
   background: rgba(15, 23, 42, 0.45);
+  pointer-events: none;  /* pass all clicks through to the page; nav closes via document listener */
   animation: fade-in var(--dur) var(--ease);
-  cursor: pointer;
 }
 @keyframes fade-in {
   from { opacity: 0; }

@@ -154,14 +154,14 @@
     // Backdrop click closes
     if (bdrop) {
       bdrop.addEventListener('click', function () { setOpen(false); });
-    } else {
-      // Fallback: click outside nav
-      document.addEventListener('click', function (e) {
-        if (!nav.classList.contains('is-open')) return;
-        if (nav.contains(e.target) || toggle.contains(e.target)) return;
-        setOpen(false);
-      });
     }
+
+    // Click outside nav + toggle always closes (works even with pointer-events:none backdrop)
+    document.addEventListener('click', function (e) {
+      if (!nav.classList.contains('is-open')) return;
+      if (nav.contains(e.target) || toggle.contains(e.target)) return;
+      setOpen(false);
+    });
 
     // Reset at tablet+
     var mql = window.matchMedia('(min-width: 768px)');
