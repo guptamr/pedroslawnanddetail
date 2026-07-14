@@ -486,7 +486,7 @@ button {
 .primary-nav {
   position: fixed;
   top: 0;
-  right: 0;
+  right: -100vw;   /* off-screen: no transform, no forced stacking context */
   bottom: 0;
   width: min(320px, 82vw);
   padding: calc(var(--nav-height) + 1.5rem) 1.5rem 2rem;
@@ -495,15 +495,12 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  transform: translateX(102%);
-  transition: transform var(--dur) var(--ease);
-  /* transform creates a stacking context — explicit z-index ensures
-     this context participates at a positive layer within header (9999) */
-  z-index: 1;
+  transition: right var(--dur) var(--ease);
+  z-index: auto;
   overflow-y: auto;
 }
 .primary-nav.is-open {
-  transform: translateX(0);
+  right: 0;
 }
 .primary-nav a {
   display: block;
@@ -1495,7 +1492,7 @@ body.nav-open {
   }
   .primary-nav {
     position: static;
-    transform: none;
+    right: auto;
     width: auto;
     height: auto;
     padding: 0;
