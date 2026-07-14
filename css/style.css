@@ -380,7 +380,7 @@ button {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 50;
+  z-index: 100;
   height: var(--nav-height);
   background: rgba(250, 250, 247, 0.72);
   backdrop-filter: saturate(180%) blur(14px);
@@ -460,7 +460,7 @@ button {
   padding: 10px;
   border-radius: 10px;
   background: transparent;
-  z-index: 60;
+  z-index: 310;
 }
 .nav-toggle__bar {
   display: block;
@@ -498,7 +498,7 @@ button {
   gap: 0.25rem;
   transform: translateX(102%);
   transition: transform var(--dur) var(--ease);
-  z-index: 55;
+  z-index: 300;
   overflow-y: auto;
 }
 .primary-nav.is-open {
@@ -528,11 +528,11 @@ body.nav-open {
   overflow: hidden;
 }
 
-/* Backdrop — dedicated element, z-index below nav (55) but above page content */
+/* Backdrop — dedicated element, z-index below nav (300) but above page content */
 #navBackdrop {
   position: fixed;
   inset: 0;
-  z-index: 48;
+  z-index: 200;
   background: rgba(15, 23, 42, 0.45);
   animation: fade-in var(--dur) var(--ease);
   cursor: pointer;
@@ -1170,21 +1170,13 @@ body.nav-open {
   position: relative;
 }
 .uploader__input {
-  /* Truly hidden — accessible via <label for="photos"> which is the uploader__area */
+  /* Accessible-hidden: screen readers can reach it, label triggers it */
   position: absolute;
+  left: -9999px;
   width: 1px;
   height: 1px;
-  padding: 0;
-  margin: -1px;
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
   opacity: 0;
-}
-.uploader__input:focus-visible ~ .uploader__area {
-  border-color: var(--color-cta);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
 }
 .uploader__area {
   display: flex;
@@ -1513,6 +1505,7 @@ body.nav-open {
     align-items: center;
     gap: var(--sp-1);
     overflow: visible;
+    z-index: auto;
   }
   .primary-nav a {
     padding: 0.5rem 0.9rem;
