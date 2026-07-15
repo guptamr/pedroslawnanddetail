@@ -382,20 +382,32 @@ button {
   right: 0;
   z-index: 9999;
   height: var(--nav-height);
+  /* No backdrop-filter here — it would make this element the containing
+     block for position:fixed children (primary-nav), constraining the
+     nav to the header's height instead of the full viewport. */
+  border-bottom: 1px solid transparent;
+  transition:
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+/* Frosted glass background lives in ::before so it doesn't affect
+   the containing block of fixed descendants */
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   background: rgba(250, 250, 247, 0.72);
   backdrop-filter: saturate(180%) blur(14px);
   -webkit-backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid transparent;
-  transition:
-    background-color var(--dur) var(--ease),
-    border-color var(--dur) var(--ease),
-    box-shadow var(--dur) var(--ease),
-    height var(--dur) var(--ease);
+  transition: background-color var(--dur) var(--ease);
 }
 .site-header.is-scrolled {
-  background: rgba(255, 255, 255, 0.94);
   border-bottom-color: var(--color-border);
   box-shadow: var(--shadow-nav);
+}
+.site-header.is-scrolled::before {
+  background: rgba(255, 255, 255, 0.94);
 }
 
 .site-header__inner {
@@ -404,6 +416,8 @@ button {
   justify-content: space-between;
   gap: var(--sp-4);
   height: 100%;
+  position: relative; /* sit above the ::before backdrop layer */
+  z-index: 1;
 }
 
 /* Brand / logo mark */
