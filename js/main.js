@@ -366,8 +366,119 @@
   }
 
   /* -----------------------------------------------------------
-     8. FORM UX
+     8. FORM UX — file uploader (with Canvas compression) + AJAX submit
      ----------------------------------------------------------- */
+
+  /* Compress a single image file to JPEG via Canvas.
+     Calls callback(blob, filename, size) on completion.
+     Non-image files are passed through unchanged. */
+  function compressImage(file, callback) {
+    if (!file.type.startsWith('image/')) {
+      callback(file, file.name, file.size);
+      return;
+    }
+    var reader = new FileReader();
+    reader.onerror = function () { callback(file, file.name, file.size); };
+    reader.onload = function (evt) {
+      var img = new Image();
+      img.onerror = function () { callback(file, file.name, file.size); };
+      img.onload = function () {
+        var W = img.naturalWidth || img.width;
+        var H = img.naturalHeight || img.height;
+        if (W > COMPRESS_MAX_PX || H > COMPRESS_MAX_PX) {
+          if (W >= H) { H = Math.round(H * COMPRESS_MAX_PX / W); W = COMPRESS_MAX_PX; }
+          else { W = Math.round(W * COMPRESS_MAX_PX / H); H = COMPRESS_MAX_PX; }
+        }
+        var canvas = document.createElement('canvas');
+        canvas.width = W;
+        canvas.height = H;
+        canvas.getContext('2d').drawImage(img, 0, 0, W, H);
+        canvas.toBlob(function (blob) {
+          if (!blob) { callback(file, file.name, file.size); return; }
+          var outName = file.name.replace(/\.[^.]+$/, '') + '.jpg';
+          callback(blob, outName, blob.size);
+        }, 'image/jpeg', COMPRESS_QUALITY);
+      };
+      img.src = evt.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function initFileUploader() {
+    var uploader = document.querySelector('[data-uploader]');
+    if (!uploader) return;
+    var input   = uploader.querySelector('[data-uploader-input]');
+    var area    = uploader.querySelector('[data-uploader-area]');
+    var list    = uploader.querySelector('[data-uploader-list]');
+    var errorEl = uploader.querySelector('[data-uploader-error]');
+    if (!input || !area) return;
+
+    function showError(msg) { if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; } }
+    function clearError()   { if (errorEl) { errorEl.hidden = true; errorEl.textContent = ''; } }
+
+    function handleFiles(files) {
+      var arr = Array.prototype.slice.call(files || []);
+      compressedFiles = [];
+      clearError();
+      if (list) list.innerHTML = '';
+
+      if (arr.length === 0) { if (list) list.hidden = true; return; }
+      if (arr.length > MAX_UPLOAD_FILES) {
+        showError('Please attach no more than ' + MAX_UPLOAD_FILES + ' photos.');
+        if (list) list.hidden = true;
+        return;
+      }
+
+      // Show "Compressing…" placeholder immediately
+      if (list) {
+        list.hidden = false;
+        var ph = document.createElement('li');
+        ph.className = 'uploader__item uploader__item--loading';
+        ph.textContent = 'Compressing ' + arr.length + ' photo' + (arr.length > 1 ? 's' : '') + '\u2026';
+        list.appendChild(ph);
+      }
+
+      var done = 0;
+      var results = new Array(arr.length);
+      arr.forEach(function (file, idx) {
+        compressImage(file, function (blob, name, size) {
+          results[idx] = { blob: blob, name: name, size: size };
+          done++;
+          if (done < arr.length) return;
+          // All done — render final list
+          compressedFiles = results;
+          if (!list) return;
+          list.innerHTML = '';
+          results.forEach(function (f) {
+            var li = document.createElement('li');
+            li.className = 'uploader__item';
+            var nm = document.createElement('span'); nm.className = 'uploader__name'; nm.textContent = f.name;
+            var sz = document.createElement('span'); sz.className = 'uploader__size'; sz.textContent = humanBytes(f.size);
+            li.appendChild(nm); li.appendChild(sz);
+            list.appendChild(li);
+          });
+          list.hidden = false;
+        });
+      });
+    }
+
+    // Native click-to-browse via <label for="photos">
+    input.addEventListener('change', function () { handleFiles(input.files); });
+
+    // Drag-and-drop
+    ['dragenter', 'dragover'].forEach(function (ev) {
+      area.addEventListener(ev, function (e) { e.preventDefault(); e.stopPropagation(); area.classList.add('is-dragover'); });
+    });
+    ['dragleave', 'drop'].forEach(function (ev) {
+      area.addEventListener(ev, function (e) { e.preventDefault(); e.stopPropagation(); area.classList.remove('is-dragover'); });
+    });
+    area.addEventListener('drop', function (e) {
+      var dt = e.dataTransfer;
+      if (!dt || !dt.files || !dt.files.length) return;
+      handleFiles(dt.files);
+    });
+  }
+
   function initFormUX() {
     var form = document.getElementById('contactForm');
     var status = document.getElementById('formStatus');
@@ -491,6 +602,7 @@
     initGalleryFilters();
     initLightbox();
     initScrollReveal();
+    initFileUploader();
     initFormUX();
     initFooterYear();
   }
