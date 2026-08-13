@@ -30,9 +30,9 @@ All work-gallery images are **real before-and-after photos** supplied by Pedro. 
 
 ## AI / stock imagery
 
-Decorative imagery is used on the two service cards (`#services`). Both are free-for-commercial-use photos licensed under the [Pexels License](https://www.pexels.com/license/) — no attribution required, but credited here for transparency.
+Decorative imagery is used on the two service cards (`#services`). One image is from Pexels and one was client-provided.
 
 | File | Source | License | Note |
 |---|---|---|---|
 | `decor/lawn-mowing-action.jpg` | [Pexels photo 6728919 by Magic K](https://www.pexels.com/photo/a-person-using-a-lawn-mower-6728919/) | Pexels License (free commercial) | Push mower cutting fresh grass at sunset — service card header |
-| `decor/car-interior-detailing.jpg` | [Pexels photo 6873185 by Tima Miroshnichenko](https://www.pexels.com/photo/a-man-in-black-jacket-cleaning-the-seat-of-a-car-6873185/) | Pexels License (free commercial) | Interior car detailing in progress — service card header |
+| `decor/car-interior-steam-detail.jpeg` | Client-provided image (`interior-detail.jpeg`) | Client-provided | Steam-clean interior detailing shot used on the detailing service card |
